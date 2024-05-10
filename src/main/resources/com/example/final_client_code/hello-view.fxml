@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.final_client_code.newMain">
+    <children>
+        <AnchorPane layoutX="-25.0" prefHeight="207.0" prefWidth="477.0" styleClass="header">
+            <children>
+                <Circle fill="WHITE" layoutX="462.0" layoutY="195.0" radius="4.0" stroke="WHITE" strokeType="INSIDE" styleClass="blue-circle" />
+                <StackPane fx:id="backPane" layoutX="38.0" layoutY="14.0" prefHeight="32.0" prefWidth="92.0" styleClass="back_pane">
+                    <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="text" text="&lt; Back" textAlignment="CENTER" wrappingWidth="75.31689453125" />
+                    </children>
+                </StackPane>
+                <StackPane layoutX="27.0" layoutY="110.0" prefHeight="86.0" prefWidth="448.0" />
+                <StackPane fx:id="refreshPane" layoutX="432.0" layoutY="14.0" prefHeight="32.0" prefWidth="36.0" styleClass="refresh-pane" />
+            </children>
+        </AnchorPane>
+        <Pane layoutX="8.0" layoutY="258.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="45.7">
+            <styleClass>
+                <String fx:value="mini-rectangle" />
+                <String fx:value="blue-rectangle" />
+            </styleClass>
+        </Pane>
+        <Pane layoutX="408.0" layoutY="252.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="46.4">
+            <styleClass>
+                <String fx:value="mini-rectangle" />
+                <String fx:value="blue-rectangle" />
+            </styleClass>
+        </Pane>
+        <Pane layoutX="436.0" layoutY="339.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="36.9">
+            <styleClass>
+                <String fx:value="mini-rectangle" />
+                <String fx:value="blue-rectangle" />
+            </styleClass>
+        </Pane>
+        <Pane layoutX="445.0" layoutY="587.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="109.7">
+            <styleClass>
+                <String fx:value="mini-rectangle" />
+                <String fx:value="blue-rectangle" />
+            </styleClass>
+        </Pane>
+        <Pane layoutX="362.0" layoutY="721.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="126.9" />
+        <Pane layoutX="75.0" layoutY="681.0" maxHeight="24.0" maxWidth="37.0" minWidth="8.0" prefHeight="13.0" prefWidth="37.0" rotate="-156.3">
+            <styleClass>
+                <String fx:value="mini-rectangle" />
+                <String fx:value="gray-rectangle" />
+            </styleClass>
+        </Pane>
+        <VBox layoutX="13.0" layoutY="114.0" prefHeight="138.0" prefWidth="428.0" styleClass="container">
+            <effect>
+                <DropShadow height="52.14" radius="22.2325" width="38.79">
+                    <color>
+                        <Color red="0.4300000071525574" green="0.4300000071525574" blue="0.4300000071525574" opacity="0.501915693283081" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <children>
+                <AnchorPane prefHeight="132.0" prefWidth="426.0" styleClass="block">
+                    <children>
+                        <HBox layoutX="11.0" layoutY="20.0" prefHeight="96.0" prefWidth="408.0" styleClass="box">
+                            <children>
+                                <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-radius: 50px;" styleClass="image" />
+                                <StackPane prefHeight="66.0" prefWidth="117.0">
+                                    <children>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MyBank" wrappingWidth="102.73197937011719">
+                                            <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="card-name" />
+                                            </styleClass>
+                                        </Text>
+                                    </children>
+                                </StackPane>
+                                <StackPane prefHeight="66.0" prefWidth="163.0">
+                                    <children>
+                                        <Text fx:id="myBankMoneyCount" strokeType="OUTSIDE" strokeWidth="0.0" text="20000000 tg" textAlignment="RIGHT" wrappingWidth="183.63613891601562">
+                                            <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="balance-text" />
+                                            </styleClass>
+                                        </Text>
+                                    </children>
+                                </StackPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <TextField fx:id="phoneTextField" layoutX="49.0" layoutY="446.0" prefHeight="49.0" prefWidth="331.0" style="-fx-font-size: 22px; -fx-background-color: white;">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+        <AnchorPane layoutX="33.0" layoutY="337.0" prefHeight="41.0" prefWidth="385.0" style="-fx-border-width: 0 0 2px 0; -fx-border-color: #6fa4e3;">
+            <children>
+                <Text layoutX="25.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 17px;" styleClass="text" text="Recipient's name:" textAlignment="CENTER" wrappingWidth="148.15432739257812" />
+                <Text fx:id="recipientNameText" layoutX="177.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 17px;" styleClass="text" text="null" wrappingWidth="148.15432739257812" />
+            </children>
+        </AnchorPane>
+        <Text fx:id="hiddenPhoneNumberText" fill="#6f6f6f" layoutX="39.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipient's phone number" />
+        <Text fx:id="commissionText" layoutX="174.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commission: 0tg" />
+        <Button fx:id="transferButton" layoutX="13.0" layoutY="539.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="428.0" style="-fx-font-weight: bold; -fx-font-size: 20px;" styleClass="blue-button" text="Transfer" />
+      <Text layoutX="45.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <AnchorPane layoutX="85.0" layoutY="388.0" prefHeight="49.0" prefWidth="258.0">
+         <children>
+            <MenuButton fx:id="curr" layoutX="163.0" layoutY="11.0" mnemonicParsing="false" text="Currency">
+              <items>
+                <MenuItem fx:id="tenge" mnemonicParsing="false" text="Tenge" />
+                <MenuItem fx:id="dollar" mnemonicParsing="false" text="Dollar" />
+                  <MenuItem fx:id="rubl" mnemonicParsing="false" text="rubles" />
+              </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+            <TextField fx:id="sum_text" layoutX="8.0" layoutY="12.0" prefHeight="26.0" prefWidth="139.0" promptText="sum">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="phoneTextField1" editable="false" layoutX="39.0" layoutY="284.0" prefHeight="49.0" prefWidth="56.0" style="-fx-font-size: 22px; -fx-background-color: white;" text="+7" />
+    </children>
+</AnchorPane>

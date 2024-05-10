@@ -1,0 +1,62 @@
+.text{
+    -fx-font-family:'Montserrat';
+}
+
+.sign-in-button {
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+    -fx-background-color:  #65c366;
+    -fx-text-fill: white;
+    -fx-background-radius: 50;
+    -fx-background-insets: 2;
+    -fx-padding: 10px 100px
+    
+}
+.sign-in-button:hover{
+    -fx-background-color: #63a764;
+}
+.header{
+    -fx-background-color:  #6fa4e3;
+    -fx-border-radius: 40;
+    -fx-background-radius:0 0 0 1000px;
+}
+
+.bank-text{
+    -fx-font-size:45px;
+    -fx-font-weight: 700;
+}
+.app-text{
+    -fx-font-size:45px;
+    -fx-font-weight: 500;
+}
+.register-text{
+    -fx-font-size:15px;
+    -fx-font-weight: 800;
+}
+.line-text{
+    -fx-fill:#78c279;
+    -fx-font-size:25px;
+    -fx-font-weight: 800;
+    -fx-transition: all 2s ease;
+}
+.register-button:hover .line-text{
+    -fx-translate-x:10px;
+}
+.register-button:hover .register-text{
+    -fx-underline: true;
+}
+.mini-rectangle{
+    -fx-max-width:11px;
+    -fx-min-width:11px;
+    -fx-max-height:11px;
+    -fx-min-height:11px;
+}
+.blue-rectangle{
+    -fx-background-color:  #97c9fd;
+}
+.gray-rectangle{
+    -fx-background-color:  #e0e0e0;
+}
+.blue-circle{
+    -fx-background-color: white;
+}

@@ -1,0 +1,47 @@
+.text{
+    -fx-font-family:'Montserrat';
+}
+.header{
+    -fx-background-color:  #6fa4e3;
+    -fx-border-radius: 40;
+    -fx-background-radius:0 0 1000px 0;
+}
+.sign-in-text{
+    -fx-font-size: 35px;
+    -fx-fill:#fff;
+    -fx-font-weight: 700;
+}
+.log-in-button{
+    -fx-padding: 10px 70px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+    -fx-background-color:  #6fa4e3;
+    -fx-text-fill: white;
+    -fx-background-radius: 50;
+    -fx-background-insets: 2;
+}
+.log-in-button:hover{
+    -fx-background-color: #407fca;
+}
+.log-in-button-focus{
+    -fx-background-color: #407fca;
+}
+.hidden-node {
+    -fx-opacity: 0;
+}
+.unhidden-node{
+    -fx-opacity: 1;
+}
+.back_pane:hover{
+    -fx-background-color: #3d85da;
+}
+.hidden_field{
+    -fx-opacity: 0;
+}
+.pass-text{
+    font-size: 20px;
+}
+.forgot-password{
+    -fx-font-size:15px;
+    -fx-font-fill:#000;
+}

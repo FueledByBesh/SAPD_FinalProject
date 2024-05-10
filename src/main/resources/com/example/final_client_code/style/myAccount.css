@@ -1,0 +1,63 @@
+.text{
+    -fx-font-family:'Montserrat';
+}
+.header{
+    -fx-background-color:  #6fa4e3;
+    -fx-border-radius: 40;
+}
+.main-page-text{
+    -fx-font-size: 28px;
+    -fx-fill:#fff;
+    -fx-font-weight: 700;
+}
+.back_pane{
+    -fx-background-color: #6098dc;
+}
+.back_pane:hover{
+    -fx-background-color: #3d85da;
+}
+.card-name{
+    -fx-font-size:20px;
+}
+.balance-text{
+    -fx-font-size:23px;
+    -fx-font-weight:bold;
+}
+.container{
+    -fx-background-color:#fff;
+    -fx-background-radius:10px;
+}
+.box{
+    -fx-padding:15px;
+    -fx-spacing: 15px;
+    -fx-background-radius: 7px;
+}
+
+.image{
+    -fx-border-radius: 10; /* Set your desired border radius */
+    -fx-background-radius: 10; /* Set your desired background radius */
+    -fx-background-color: white;
+}
+.log-out-button{
+    -fx-background-color: #fd5050;
+    -fx-text-fill:#fff;
+    -fx-padding:10px;
+    -fx-font-size:15px;
+    -fx-font-weight:bold;
+}
+
+.refresh-pane{
+    -fx-background-color: #6098dc;
+}
+.refresh-pane:hover{
+    -fx-background-color: #3d85da;
+}
+.blue-button{
+    -fx-background-color: #6fa4e3;
+    -fx-text-fill:#fff;
+    -fx-font-size:15px;
+    -fx-font-weight:bold;
+}
+.blue-button:hover{
+    -fx-background-color: #3d85da;
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="156.0" prefWidth="394.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.final_client_code.Controllers.StockBlockController">
+   <children>
+      <StackPane prefHeight="154.0" prefWidth="115.0" style="-fx-padding: 20px;">
+         <children>
+            <ImageView fx:id="stockImage" fitHeight="107.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photo/Stock_icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </StackPane>
+      <VBox prefHeight="154.0" prefWidth="247.0" style="-fx-padding: 20px; -fx-spacing: 5px;" stylesheets="@style/mianpage.css">
+         <children>
+            <Text fx:id="stockNameText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 17px;" styleClass="text" text="StockName" wrappingWidth="186.21630859375" />
+            <HBox>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="text" text="Price: " wrappingWidth="42.7139892578125" />
+                  <Text fx:id="stockPriceText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="15000tg" wrappingWidth="199.21630859375" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Text fx:id="stockDescriptionText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="SDU Store opened at 2023year in univercity SDU" wrappingWidth="199.21630859375" />
+               </children>
+            </HBox>
+            <HBox prefHeight="44.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="98.0" style="-fx-spacing: 2px;">
+                     <children>
+                        <Button fx:id="minusButton" mnemonicParsing="false" style="-fx-border-color: #00;" styleClass="text" text="-" />
+                        <TextField fx:id="stockCountField" alignment="CENTER" prefHeight="26.0" prefWidth="32.0" styleClass="text" stylesheets="@style/mianpage.css" text="1" />
+                        <Button fx:id="plusbutton" mnemonicParsing="false" style="-fx-border-color: #00;" styleClass="text" text="+" />
+                     </children>
+                  </HBox>
+                  <StackPane prefHeight="50.0" prefWidth="91.0">
+                     <children>
+                        <Button fx:id="buybutton" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" style="-fx-font-weight: bold;" stylesheets="@style/mianpage.css" text="Buy">
+                           <styleClass>
+                              <String fx:value="blue-button" />
+                              <String fx:value="text" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </StackPane>
+               </children>
+               <stylesheets>
+                  <URL value="@style/stockBlock.css" />
+                  <URL value="@style/myAccount.css" />
+               </stylesheets>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="hBoxMain" minWidth="420.0" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.final_client_code.Controllers.MessageBlockController">
+   <children>
+      <StackPane fx:id="messageBlock" style="-fx-padding: 5px; -fx-background-radius: 15px 15px 15px 0; -fx-background-color: #fff;" stylesheets="@style/myAccount.css">
+          <children>
+              <VBox fx:id="messageVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefWidth="305.0">
+                  <children>
+                      <HBox fx:id="moneyAmountBox" alignment="CENTER" prefHeight="15.0" prefWidth="305.0">
+                          <children>
+                              <Text fx:id="moneyAmountText" strokeType="OUTSIDE" strokeWidth="0.0" text="Пополнение: +200tg" wrappingWidth="290.1926155090332" />
+                          </children>
+                      </HBox>
+                      <HBox fx:id="messageFromOrToBox" alignment="CENTER" prefHeight="22.0" prefWidth="305.0">
+                          <children>
+                              <Text fx:id="messageFromOrToText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" styleClass="text" text="Nurmukhamet K." wrappingWidth="290.1926155090332" />
+                          </children>
+                      </HBox>
+                      <HBox fx:id="availableMoneyBox" alignment="CENTER" prefHeight="15.0" prefWidth="305.0">
+                          <children>
+                              <Text fx:id="availableMoneyText" strokeType="OUTSIDE" strokeWidth="0.0" text="Доступно: 1000tg" wrappingWidth="290.1926155090332" />
+                          </children>
+                      </HBox>
+                      <HBox fx:id="messageBox" alignment="CENTER" disable="true" prefHeight="15.0" prefWidth="305.0">
+                          <children>
+                              <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Message: Null" wrappingWidth="290.1926155090332">
+                                  <HBox.margin>
+                                      <Insets bottom="5.0" top="5.0" />
+                                  </HBox.margin>
+                              </Text>
+                          </children>
+                      </HBox>
+                      <HBox fx:id="timeBox" alignment="CENTER" prefHeight="15.0" prefWidth="305.0">
+                          <children>
+                              <Text fx:id="timeText" strokeType="OUTSIDE" strokeWidth="0.0" text="13:30" textAlignment="RIGHT" wrappingWidth="290.1926155090332" />
+                          </children>
+                      </HBox>
+                  </children>
+              </VBox>
+          </children>
+          <effect>
+              <DropShadow>
+                  <color>
+                      <Color opacity="0.28489482402801514" />
+                  </color>
+              </DropShadow>
+          </effect>
+      </StackPane>
+   </children>
+</HBox>

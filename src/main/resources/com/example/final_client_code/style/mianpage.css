@@ -1,0 +1,24 @@
+.text{
+    -fx-font-family:'Montserrat';
+}
+.container{
+    -fx-background-color:#fff;
+    -fx-background-radius:10px;
+}
+.box{
+    -fx-padding:15px;
+    -fx-spacing: 15px;
+    -fx-background-radius: 7px;
+    -fx-border-color: #80808066;
+    -fx-border-width: 2px;
+
+}
+.box:hover{
+    -fx-border-color:  #6fa4e3;
+}
+.back-pane{
+    -fx-background-color: #fd5050;
+}
+.back-pane:hover{
+    -fx-background-color: #fa2121;
+}

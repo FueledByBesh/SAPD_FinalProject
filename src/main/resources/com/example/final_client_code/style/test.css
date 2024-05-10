@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Alice';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("fonts/Alice-Regular.ttf");
+}
+
+.text {
+    -fx-font-family: "Alice";
+    -fx-font-weight: 300; /* Use the same font-weight as specified in @font-face */
+}
