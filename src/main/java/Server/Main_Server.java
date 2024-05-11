@@ -14,7 +14,7 @@ import java.util.List;
 public class Main_Server {
     public static void main(String[] args) {
         try {
-            Server server = new Server(9999,5432,"newBankDB","postgres","uk888888");
+            Server server = new Server(9999,5433,"newBankDB","postgres","olzhas05");
 //            server.getStockChanger().changePrice(1, 10000);
 
             while (true){

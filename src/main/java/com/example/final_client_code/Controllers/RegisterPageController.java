@@ -94,7 +94,6 @@ public class RegisterPageController {
             String lastName = lastNameTextField.getText().trim();
 
 
-
             LocalDate birthDate = birthdayDate.getValue();
 
 
@@ -116,12 +115,12 @@ public class RegisterPageController {
             }
 
             if(!email.contains("@")){
-                Methods.showErrorAlert("Un correct email", "Write correct Email address!!!");
+                Methods.showErrorAlert("Incorrect email", "Write correct Email address!!!");
                 return;
             }
 
             if(!firstPass.equals(secondPass)){
-                Methods.showErrorAlert("Passwords is not equal", "Write equal password!!!");
+                Methods.showErrorAlert("Passwords don't match", "Write same password!!!");
                 return;
             }
 
