@@ -76,6 +76,63 @@ public class Methods {
             }
         });
     }
+
+    public static void addShowPassToCheck(CheckBox checkBox,PasswordField passField1, TextField hiddenPassField1, PasswordField passField2, TextField hiddenPassField2){
+        checkBox.setOnMouseClicked(mouseEvent -> {
+            if(checkBox.isSelected()){
+                String passValue1 = passField1.getText().trim();
+                String passValue2 = passField2.getText().trim();
+
+                hiddenPassField1.setText(passValue1);
+                hiddenPassField2.setText(passValue2);
+                passField1.getStyleClass().add("hidden_field");
+                passField2.getStyleClass().add("hidden_field");
+                passField1.setEditable(false);
+                passField2.setEditable(false);
+                passField1.setMouseTransparent(true);
+                passField2.setMouseTransparent(true);
+                passField1.setDisable(true);
+                passField2.setDisable(true);
+                hiddenPassField1.getStyleClass().remove("hidden_field");
+                hiddenPassField2.getStyleClass().remove("hidden_field");
+                hiddenPassField1.setMouseTransparent(false);
+                hiddenPassField2.setMouseTransparent(false);
+                hiddenPassField1.setEditable(true);
+                hiddenPassField2.setEditable(true);
+                hiddenPassField1.setDisable(false);
+                hiddenPassField2.setDisable(false);
+
+//                System.out.println("not hidded"+checkBox.isSelected()+", editable="+passField.editableProperty().getValue()+", mouseTra="+passField.mouseTransparentProperty().getValue());
+//                System.out.println("Hidded"+checkBox.isSelected()+", editable="+hiddenPassField.editableProperty().getValue()+", mouseTra="+hiddenPassField.mouseTransparentProperty().getValue());
+
+            }else {
+                String passValue1 = hiddenPassField1.getText().trim();
+                String passValue2 = hiddenPassField2.getText().trim();
+
+                passField1.setText(passValue1);
+                passField2.setText(passValue2);
+                hiddenPassField1.getStyleClass().add("hidden_field");
+                hiddenPassField2.getStyleClass().add("hidden_field");
+                hiddenPassField1.setMouseTransparent(true);
+                hiddenPassField2.setMouseTransparent(true);
+                hiddenPassField1.setEditable(false);
+                hiddenPassField2.setEditable(false);
+                hiddenPassField1.setDisable(true);
+                hiddenPassField2.setDisable(true);
+                passField1.getStyleClass().remove("hidden_field");
+                passField2.getStyleClass().remove("hidden_field");
+                passField1.setMouseTransparent(false);
+                passField2.setMouseTransparent(false);
+                passField1.setEditable(true);
+                passField2.setEditable(true);
+                passField1.setDisable(false);
+                passField2.setDisable(false);
+//                System.out.println("not hidded"+checkBox.isSelected()+", editable="+passField.editableProperty().getValue()+", mouseTra="+passField.mouseTransparentProperty().getValue());
+//                System.out.println("Hidded"+checkBox.isSelected()+", editable="+hiddenPassField.editableProperty().getValue()+", mouseTra="+hiddenPassField.mouseTransparentProperty().getValue());
+            }
+        });
+    }
+
     public static void addFocusToButton(Button button){
         button.focusedProperty().addListener((observableValue, aBoolean, newValue) -> {
             if(newValue){

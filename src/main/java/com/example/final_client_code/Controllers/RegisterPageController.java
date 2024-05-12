@@ -149,7 +149,7 @@ public class RegisterPageController {
                 boolean isRegistered = in.readBoolean();
 
                 if (isRegistered){
-                    Methods.showConfirmAlert("Success", "User already registered :)");
+                    Methods.showConfirmAlert("Success", "You've successfully registered :)");
                     phoneTextField.clear();
                     firstNameTextField.clear();
                     lastNameTextField.clear();
@@ -158,6 +158,7 @@ public class RegisterPageController {
                     hiddenPasswordTextField.clear();
                     rewritePasswordTextField.clear();
                     hiddenRewritePasswordTextField.clear();
+                    birthdayDate.setValue(null);
                 }else {
                     String error = in.readUTF();
                     Methods.showErrorAlert("ERROR", error);
@@ -181,8 +182,9 @@ public class RegisterPageController {
         Methods.addToFieldOnFocus(rewritePasswordTextField, hiddenPasswordText);
         Methods.addToFieldOnFocus(hiddenRewritePasswordTextField, hiddenPasswordText);
 
-        Methods.addShowPassToCheck(showPasswordCheckBox, rewritePasswordTextField, hiddenRewritePasswordTextField);
-        Methods.addShowPassToCheck(showPasswordCheckBox, passwordTextField, hiddenPasswordTextField);
+//        Methods.addShowPassToCheck(showPasswordCheckBox, rewritePasswordTextField, hiddenRewritePasswordTextField);
+//        Methods.addShowPassToCheck(showPasswordCheckBox, passwordTextField, hiddenPasswordTextField);
+        Methods.addShowPassToCheck(showPasswordCheckBox,passwordTextField,hiddenPasswordTextField,rewritePasswordTextField,hiddenRewritePasswordTextField);
 
         Methods.addFocusToButton(registerButton);
 
