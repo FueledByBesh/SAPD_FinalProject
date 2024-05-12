@@ -79,11 +79,11 @@ public class MyAccountPageController {
     public void refreshPage(){
         MyUser.refreshNotAll();
         bigNameSurname.setText(MyUser.getCurrentUser().getShortenFullName());
-        myBankMoneyCount.setText(MyUser.getCurrentUser().getBalance()+"tg");
+        myBankMoneyCount.setText(MyUser.getCurrentUser().getBalance()+"₸");
         infoNameText.setText(MyUser.getCurrentUser().getFullName());
         infoPhoneText.setText(MyUser.getCurrentUser().getPhone());
         infoEmailText.setText(MyUser.getCurrentUser().getEmail());
-        infoBalanceTExt.setText(MyUser.getCurrentUser().getBalance()+"tg");
+        infoBalanceTExt.setText(MyUser.getCurrentUser().getBalance()+"₸");
         infoBirthDateText.setText(MyUser.getCurrentUser().getUserInfo().getBirthDate().toString());
     }
 

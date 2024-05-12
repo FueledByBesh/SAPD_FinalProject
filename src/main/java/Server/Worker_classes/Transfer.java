@@ -55,7 +55,7 @@ public class Transfer implements Worker{
             System.out.println("transfer error, "+e.getMessage());
             return false;
         }
-        // TODO: 31.12.2023 (Message sends auto in SQL)!!!
+        // TODO: 31.12.2023 (Message sends auto in SQL)!!! -> PS: бля нахуя?
     }
 
     public boolean buyStock(int userID, int stockID, int stockCount){

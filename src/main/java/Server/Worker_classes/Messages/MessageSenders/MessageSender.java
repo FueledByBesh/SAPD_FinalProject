@@ -57,11 +57,13 @@ public abstract class MessageSender {
         MessageFactory factory = getFactoryByMessageType(messageType);
         if(factory == null) return;
         messages.add(factory.getMessage(table));
+        // по моему это лишнее
         if(table.next()){
             do{
                 messages.add(factory.getMessage(table));
             }while (table.next());
         }
+        //
     }
     protected MessageFactory getFactoryByMessageType(int messageType){
         switch (messageType) {

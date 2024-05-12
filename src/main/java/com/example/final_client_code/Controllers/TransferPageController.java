@@ -72,7 +72,7 @@ public class TransferPageController {
 
                 recipientNameText.setText(userName);
             }else {
-                recipientNameText.setText("null");
+                recipientNameText.setText("unknown");
                 transferToUser = null;
             }
         });
@@ -92,12 +92,17 @@ public class TransferPageController {
             transferToUser = proxy.getFromDataBase(phone);
 
             if(transferToUser == null){
-                Methods.showErrorAlert("ERROR", "User with this id nat found!!!");
+                Methods.showErrorAlert("ERROR", "User with such phone not found!!!");
                 return;
             }
 
             if(MyUser.getCurrentUser().getBalance() < moneyAmount){
                 Methods.showErrorAlert("ERROR", "You don't have enough money to transfer!!!");
+                return;
+            }
+
+            if(moneyAmount<100){
+                Methods.showErrorAlert("ERROR","The transfer amount must be at least 100₸");
                 return;
             }
 
@@ -121,9 +126,9 @@ public class TransferPageController {
                 boolean isTransferred = in.readBoolean();
 
                 if(isTransferred){
-                    Methods.showConfirmAlert("Success", "Transferred money ;)");
+                    Methods.showConfirmAlert("Success", "Money Transferred Successfully :)");
                 }else {
-                    Methods.showErrorAlert("ERROR", "Something Error!!!");
+                    Methods.showErrorAlert("ERROR", "Something get Wrong :(");
                 }
                 refreshPage();
             }catch (IOException e) {

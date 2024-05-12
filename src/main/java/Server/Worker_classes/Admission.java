@@ -27,7 +27,7 @@ public class Admission implements Worker{
         User user = getUserWithPhone(phone, false);
 
         if(user == null){
-            System.out.println("User with this phone not found!");
+            System.out.println("User with such phone not found!");
             return null;
         }
         if(!password.equals(user.getPassword())){
