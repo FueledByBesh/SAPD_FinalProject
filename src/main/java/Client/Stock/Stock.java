@@ -1,26 +1,30 @@
 package Client.Stock;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 public class Stock implements Serializable {
-    int stockID;
-    String stockName;
-    int stockPrice;
-    List<StockPriceHistory> priceHistory;
-    int stockInvestorsCount;
-    String stockDescription;
-    int stockCount = 0;
-    byte[] stockIcon;
+    private int stockID;
+    private String stockName;
+    private int stockPrice;
+    private List<StockPriceHistory> priceHistory;
+    private int stockInvestorsCount;
+    private String stockDescription;
+    private int stockCount = 0;
+    private int stockIconID;
 
-    public Stock(int stockID, String stockName, int stockPrice, List<StockPriceHistory> priceHistory, int stockInvestorsCount, String stockDescription) {
+    public Stock(int stockID, String stockName, int stockPrice, List<StockPriceHistory> priceHistory, int stockInvestorsCount, String stockDescription,int stockIconID) {
         this.stockID = stockID;
         this.stockName = stockName;
         this.stockPrice = stockPrice;
         this.priceHistory = priceHistory;
         this.stockInvestorsCount = stockInvestorsCount;
         this.stockDescription = stockDescription;
+        this.stockIconID=stockIconID;
     }
 
     public String getStockName() {
@@ -40,7 +44,7 @@ public class Stock implements Serializable {
                 ", stockInvestorsCount=" + stockInvestorsCount +
                 ", stockDescription='" + stockDescription + '\'' +
                 ", stockCount=" + stockCount +
-                ", stockIcon=" + Arrays.toString(stockIcon) +
+                ", stockIconID=" + stockIconID +
                 '}';
     }
 
@@ -76,12 +80,12 @@ public class Stock implements Serializable {
         this.stockInvestorsCount = stockInvestorsCount;
     }
 
-    public byte[] getStockIcon() {
-        return stockIcon;
+    public int getStockIconID() {
+        return stockIconID;
     }
 
-    public void setStockIcon(byte[] stockIcon) {
-        this.stockIcon = stockIcon;
+    public void setStockIconID(int stockIconID) {
+        this.stockIconID = stockIconID;
     }
 
     public String getStockDescription() {

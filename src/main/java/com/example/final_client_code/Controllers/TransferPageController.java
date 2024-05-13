@@ -70,7 +70,8 @@ public class TransferPageController {
                 UsersProxy proxy = new UsersProxy();
                 String userName = proxy.getUserNameByPhone(newValue);
 
-                recipientNameText.setText(userName);
+                if(userName!=null)
+                    recipientNameText.setText(userName);
             }else {
                 recipientNameText.setText("unknown");
                 transferToUser = null;
@@ -142,26 +143,26 @@ public class TransferPageController {
 
     public void refreshPage(){
         MyUser.refreshNotAll();
-        myBankMoneyCount.setText(MyUser.getCurrentUser().getBalance()+"tg");
+        myBankMoneyCount.setText(MyUser.getCurrentUser().getBalance()+"₸");
     }
 
     public void addConstrains(){
         Methods.addNextPage(backButton, "Main_page.fxml");
         Methods.restrictToNumericInput(phoneTextField);
-        moneyFieldLogistic(moneyAmountTextField);
+        moneyFieldLogic(moneyAmountTextField);
     }
 
-    public void moneyFieldLogistic(TextField textField){
+    public void moneyFieldLogic(TextField textField){
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
-                textField.setText(newValue.replaceAll("[^\\d]", "")+"tg");
+                textField.setText(newValue.replaceAll("[^\\d]", "")+"₸");
             }else {
-                textField.setText(newValue+"tg");
+                textField.setText(newValue+"₸");
             }
             if(newValue.matches(".*t")){
                 for (int i = newValue.length()-1; i >= 0 ; i--) {
                     if(newValue.charAt(i) == 't'){
-                        textField.setText(newValue.substring(0, i-1)+"tg");
+                        textField.setText(newValue.substring(0, i-1)+"₸");
                     }
                 }
             }

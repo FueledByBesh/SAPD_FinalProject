@@ -36,13 +36,14 @@ public class StockChanger implements Worker{
         if(stock==null){
             return;
         }
+        int oldPrice = stock.getStockPrice();
 
         String query = "UPDATE Stocks SET stock_price = ? WHERE stock_id = ?";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
             statement.setInt(1, newPrice);
             statement.setInt(2, stockID);
             statement.execute();
-            System.out.println("Stock prise changed");
+            System.out.println("Stock price changed");
         } catch (SQLException e) {
             return;
         }
@@ -51,9 +52,14 @@ public class StockChanger implements Worker{
 
         for (Integer investor : investors) {
             this.messageSender.sendSimpleMessage(investor, stock.getStockName(),
-                    "Your stock '"+stock.getStockName()+"', was change the price to = "+newPrice);
+                    "Your stock '"+stock.getStockName()+"', changed price from = "+ oldPrice+"₸ to = "+newPrice+"₸");
         }
-        System.out.println("All investors was notify ;)");
+        System.out.println("All investors was notified ;)");
+
+        // UPDATED code:
+
+
+
 //        messageSender
 
     }

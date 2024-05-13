@@ -5,10 +5,13 @@ import Client.*;
 import Client.Stock.StockPriceHistory;
 import Server.DataBaseSingleton;
 import Server.Server;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class StockAdmission implements Worker{
     DataBaseSingleton dataBase;
@@ -24,16 +27,42 @@ public class StockAdmission implements Worker{
         this.admission = server.getAdmission();
     }
 
-    public void addNewStock(String stockName, String stock_description, int price) {
-        String query = "INSERT INTO Stocks(stock_name, stock_price, stock_description) VALUES (?, ?, ?)";
+    public void addNewStock(String stockName, String stock_description, int price, File icon) {
+
+        int iconId = photoManager.storeImage(icon);
+
+        int stockID = createUniqueID(stockName,stock_description,price);
+        String query = "INSERT INTO Stocks(stock_id,stock_name, stock_price, stock_description,stock_iconid) VALUES (?,?,?,?,?)";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
-            statement.setString(1, stockName);
-            statement.setInt(2, price);
-            statement.setString(3, stock_description);
+            statement.setInt(1, stockID);
+            statement.setString(2, stockName);
+            statement.setInt(3, price);
+            statement.setString(4, stock_description);
+            statement.setInt(5,iconId);
             statement.execute();
             System.out.println("New Stock added :)");
         } catch (SQLException e) {
             System.out.println("Error when addNewStock, "+e.getMessage());
+            return;
+        }
+
+        this.updateStockHistory(stockID,price);
+    }
+
+    private int createUniqueID(String stockName,String stock_description, int price){
+        List<Stock> stocks = this.getAllStocks();
+        int uniqueID = Objects.hash(stockName,stock_description,price);
+        while (true){
+            boolean acceptable = true;
+            for (Stock stock: stocks) {
+                if(stock.getStockID()==uniqueID) {
+                    acceptable = false;
+                    break;
+                }
+            }
+            if(acceptable)
+                return uniqueID;
+            uniqueID++;
         }
     }
 
@@ -60,9 +89,10 @@ public class StockAdmission implements Worker{
         String stockName = table.getString("stock_name");
         int stock_price = table.getInt("stock_price");
         String stockDescription = table.getString("stock_description");
-//        byte[] stockIcon = table.getBytes("stock_icon");
+        int iconID = table.getInt("stock_iconid");
 
-        return new Stock(stockID, stockName, stock_price, getStockHistory(stockID), getStockInvestorsID(stockID).size(), stockDescription);
+        return new Stock(stockID, stockName, stock_price, getStockHistory(stockID), getStockInvestorsID(stockID).size(), stockDescription,iconID);
+//        return new Stock(stockID, stockName, stock_price, null, 0, stockDescription);
     }
 
     public List<Stock> getAllStocks(){
@@ -77,6 +107,10 @@ public class StockAdmission implements Worker{
             System.out.println("Some error when try to get all stocks, "+e.getMessage());
         }
         return stocks;
+    }
+
+    public Image getStockImage(Stock stock){
+        return photoManager.retrieveImage(stock.getStockIconID());
     }
 
     public boolean addInvestorToStock(int userID, int stockID, int stockCount){
@@ -103,7 +137,7 @@ public class StockAdmission implements Worker{
                     statement1.setInt(1, stockCount);
                     statement1.setInt(2, table.getInt("invest_id"));
                     statement1.execute();
-                    System.out.println("user "+user.getUserInfo().getFirstName()+", invest the stock "+stock.getStockName()+", count od stocks = "+stockCount);
+                    System.out.println("user "+user.getUserInfo().getFirstName()+", invested to the stock "+stock.getStockName()+", count of stocks = "+stockCount);
                     return true;
                 }catch (SQLException e) {
                     System.out.println("Error when update StockCount, "+ e.getMessage());
@@ -145,7 +179,7 @@ public class StockAdmission implements Worker{
             }
             int usersStockCount = table.getInt("stock_count");
             if(usersStockCount < stockCount){
-                System.out.println("you don't have the enough stock");
+                System.out.println("you don't have enough stock");
                 return false;
             }
 
@@ -162,10 +196,10 @@ public class StockAdmission implements Worker{
                 statement1.execute();
                 return true;
             } catch (SQLException e) {
-                System.out.println("Error withdraw stock from user, "+e.getMessage());
+                System.out.println("Error while withdrawing stock from user, "+e.getMessage());
             }
         } catch (SQLException e) {
-            System.out.println("Error when check usersStock, "+e.getMessage());
+            System.out.println("Error while checking usersStock, "+e.getMessage());
         }
         return false;
     }
@@ -177,7 +211,7 @@ public class StockAdmission implements Worker{
             statement.execute();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error when remove the investorFromStock, "+e.getMessage());
+            System.out.println("Error while removing Investor from Stock, "+e.getMessage());
             return false;
         }
 
@@ -189,25 +223,44 @@ public class StockAdmission implements Worker{
         }
 
         List<StockPriceHistory> histories = new ArrayList<>();
-        String query = "SELECT * FROM stockPriceHistory WHERE stock_id = ?";
+        String query = "SELECT * FROM stockPriceHistory WHERE stock_id = ? ORDER BY updated_date;";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
             statement.setInt(1, stockID);
             ResultSet table = statement.executeQuery();
 
             while(table.next()){
-                int historyID = table.getInt("history_id");
-                Timestamp history_date = table.getTimestamp("history_date");
-                int price = table.getInt("price");
-                StockPriceHistory history = new StockPriceHistory(stockID, historyID, history_date.toLocalDateTime().toLocalDate(), price);
+                Timestamp history_date = table.getTimestamp("updated_date");
+                int price = table.getInt("updated_price");
+
+                StockPriceHistory history = new StockPriceHistory(stockID, history_date.toLocalDateTime(), price);
                 histories.add(history);
             }
             return histories;
 
         } catch (SQLException e) {
-            System.out.println("Error when try to get Stock HISTORY, "+e.getMessage());
+            System.out.println("Error while trying to get Stock HISTORY, "+e.getMessage());
         }
 
         return histories;
+    }
+
+    public boolean updateStockHistory(int stockID,int newPrice){
+        if(!checkStockID(stockID))
+            return false;
+
+        String query = "INSERT INTO stockPriceHistory (stock_id,updated_price,updated_date) VALUES (?,?,current_timestamp)";
+
+        try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
+            statement.setInt(1, stockID);
+            statement.setInt(2,newPrice);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Error while updating Stock HISTORY, "+e.getMessage());
+            return false;
+        }
+
+        System.out.println("Stock History Updated");
+        return true;
     }
 
     private boolean checkStockID(int stockID) {
@@ -219,9 +272,9 @@ public class StockAdmission implements Worker{
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Error when try to get Stock,"+e.getMessage());
+            System.out.println("Error while trying to get Stock ID,"+e.getMessage());
         }
-        System.out.println("Stock with this id doesn't exist!!!");
+        System.out.println("Stock with such id doesn't exist!!!");
         return false;
     }
 

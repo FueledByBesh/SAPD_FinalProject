@@ -2,30 +2,25 @@ package Client.Stock;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class StockPriceHistory implements Serializable {
     int stockID;
-    int historyID;
-    LocalDate historyDate;
+    LocalDateTime dateTime;
     int price;
 
-    public StockPriceHistory(int stockID,int historyID, LocalDate historyDate, int price) {
+    public StockPriceHistory(int stockID, LocalDateTime historyDate, int price) {
         this.stockID = stockID;
-        this.historyID = historyID;
-        this.historyDate = historyDate;
+        this.dateTime = historyDate;
         this.price = price;
     }
 
-    public int getHistoryID() {
-        return historyID;
-    }public void setHistoryID(int historyID) {
-        this.historyID = historyID;
-    }
 
-    public LocalDate getHistoryDate() {
-        return historyDate;
-    }public void setHistoryDate(LocalDate historyDate) {
-        this.historyDate = historyDate;
+    public LocalDateTime getHistoryDate() {
+        return dateTime;
+    }
+    public void setHistoryDate(LocalDateTime historyDate) {
+        this.dateTime = historyDate;
     }
 
     public int getPrice() {
@@ -38,8 +33,7 @@ public class StockPriceHistory implements Serializable {
     public String toString() {
         return "StockPriceHistory{" +
                 "stockID=" + stockID +
-                ", historyID=" + historyID +
-                ", historyDate=" + historyDate +
+                ", historyDate=" + dateTime +
                 ", price=" + price +
                 '}';
     }
