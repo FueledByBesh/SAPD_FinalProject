@@ -92,26 +92,26 @@ public class MessageBlockController {
         }else if (message.getMessageType() == MessageType.TRANSFER_MESSAGE){
             TransferMessage transferMessage = (TransferMessage) message;
             if(toMe){
-                moneyAmountText.setText("Пополнение: +"+transferMessage.getMoneyAmount()+"tg");
+                moneyAmountText.setText("Пополнение: +"+transferMessage.getMoneyAmount()+"₸");
                 messageFromOrToText.setText(transferMessage.getMessageFromName());
-                availableMoneyText.setText("Доступно: "+transferMessage.getAvailableMoneyToUser()+"tg");
+                availableMoneyText.setText("Доступно: "+transferMessage.getAvailableMoneyToUser()+"₸");
             }else {
-                moneyAmountText.setText("Перевод: -"+transferMessage.getMoneyAmount()+"tg");
+                moneyAmountText.setText("Перевод: -"+transferMessage.getMoneyAmount()+"₸");
                 messageFromOrToText.setText(transferMessage.getMessageToName());
-                availableMoneyText.setText("Доступно: "+transferMessage.getAvailableMoneyFromUser()+"tg");
+                availableMoneyText.setText("Доступно: "+transferMessage.getAvailableMoneyFromUser()+"₸");
             }
             messageText.setText("Message: "+message.getMessage());
 
         }else if(message.getMessageType() == MessageType.STOCK_SELL_MESSAGE || message.getMessageType() == MessageType.STOCK_BUY_MESSAGE) {
             StockBuySellMessage stockMessage = (StockBuySellMessage) message;
             if(message.getMessageType() == MessageType.STOCK_SELL_MESSAGE ){
-                moneyAmountText.setText("Пополнение: +"+stockMessage.getMoneyAmount()+"tg");
+                moneyAmountText.setText("Пополнение: +"+stockMessage.getMoneyAmount()+"₸");
             }else {
-                moneyAmountText.setText("Куплено: -"+stockMessage.getMoneyAmount()+"tg");
+                moneyAmountText.setText("Куплено: -"+stockMessage.getMoneyAmount()+"₸");
             }
             messageFromOrToText.setText(stockMessage.getMessageFromName());
             messageText.setText("Message: "+stockMessage.getMessage());
-            availableMoneyText.setText("Доступно: "+stockMessage.getAvailableMoney()+"tg");
+            availableMoneyText.setText("Доступно: "+stockMessage.getAvailableMoney()+"₸");
         }
 
         if (message.getMessage() == null) {

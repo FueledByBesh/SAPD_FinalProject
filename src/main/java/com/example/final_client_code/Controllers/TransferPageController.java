@@ -82,7 +82,7 @@ public class TransferPageController {
             String phone = phoneTextField.getText().trim();
 
             String moneyField = moneyAmountTextField.getText().trim();
-            int moneyAmount = Integer.parseInt(moneyField.substring(0,moneyField.length()-2));
+            int moneyAmount = Integer.parseInt(moneyField.substring(0,moneyField.length()-1));
             String message = messageTextArea.getText().trim();
 
 
@@ -132,6 +132,9 @@ public class TransferPageController {
                     Methods.showErrorAlert("ERROR", "Something get Wrong :(");
                 }
                 refreshPage();
+                moneyAmountTextField.clear();
+                messageTextArea.clear();
+                phoneTextField.clear();
             }catch (IOException e) {
                 throw new RuntimeException(e);
             }

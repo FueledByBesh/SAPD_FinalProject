@@ -92,7 +92,6 @@ public class StockAdmission implements Worker{
         int iconID = table.getInt("stock_iconid");
 
         return new Stock(stockID, stockName, stock_price, getStockHistory(stockID), getStockInvestorsID(stockID).size(), stockDescription,iconID);
-//        return new Stock(stockID, stockName, stock_price, null, 0, stockDescription);
     }
 
     public List<Stock> getAllStocks(){
@@ -244,9 +243,7 @@ public class StockAdmission implements Worker{
         return histories;
     }
 
-    public boolean updateStockHistory(int stockID,int newPrice){
-        if(!checkStockID(stockID))
-            return false;
+    public void updateStockHistory(int stockID,int newPrice){
 
         String query = "INSERT INTO stockPriceHistory (stock_id,updated_price,updated_date) VALUES (?,?,current_timestamp)";
 
@@ -256,11 +253,10 @@ public class StockAdmission implements Worker{
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Error while updating Stock HISTORY, "+e.getMessage());
-            return false;
+            return;
         }
 
         System.out.println("Stock History Updated");
-        return true;
     }
 
     private boolean checkStockID(int stockID) {

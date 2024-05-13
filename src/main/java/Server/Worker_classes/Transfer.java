@@ -38,8 +38,8 @@ public class Transfer implements Worker{
             return false;
         }
 
-        String query = "INSERT INTO transfers(transfer_from_id, transfer_from_phone, transfer_from_name, transfer_to_id, transfer_to_phone, transfer_to_name, money_amount, message) " +
-                "VALUES (?, ? ,?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO transfers(transfer_from_id, transfer_from_phone, transfer_from_name, transfer_to_id, transfer_to_phone, transfer_to_name, money_amount, message,transfer_date) " +
+                "VALUES (?, ? ,?, ?, ?, ?, ?, ?, current_timestamp)";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)) {
             statement.setInt(1, transferFromID);
             statement.setString(2, fromUser.getPhone());

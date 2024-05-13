@@ -190,7 +190,7 @@
             </DropShadow>
          </effect>
       </VBox>
-      <Button fx:id="logOutButton" layoutX="15.0" layoutY="657.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="423.0" stylesheets="@style/myAccount.css" text="Log out">
+      <Button fx:id="logOutButton" layoutX="15.0" layoutY="657.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="423.0" stylesheets="@style/myAccount.css" text="Replenish">
          <styleClass>
             <String fx:value="log-out-button" />
             <String fx:value="text" />

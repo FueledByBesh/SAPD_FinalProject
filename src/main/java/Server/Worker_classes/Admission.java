@@ -42,7 +42,7 @@ public class Admission implements Worker{
         if(user != null){
             return "User with this phone number is already exist!";
         }
-        String query = "INSERT INTO Users(phone_number, password, first_name, last_name, email, birth_date) VALUES (?,?,?,?,?,?);";
+        String query = "INSERT INTO Users(phone_number, password, first_name, last_name, email, birth_date,balance) VALUES (?,?,?,?,?,?,?);";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
             statement.setString(1, phone);
             statement.setString(2, password);
@@ -54,6 +54,7 @@ public class Admission implements Worker{
             System.out.println(sqlDate);
 
             statement.setDate(6, sqlDate);
+            statement.setInt(7,0);
 
             int updateRowsCount = statement.executeUpdate();
             statement.close();

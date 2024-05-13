@@ -1,5 +1,7 @@
 package Client;
 
+import Client.Queryes.ServerQueryType;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -43,9 +45,12 @@ public class Connection {
             System.out.println("? Error when try connect to Server ?");
         }
     }
-    void disconnectFromServer(){
+    public void disconnectFromServer(){
         try {
+            out.writeInt(ServerQueryType.LOG_OUT);
+            out.flush();
             socket.close();
+            instance = null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

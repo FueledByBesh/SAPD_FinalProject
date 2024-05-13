@@ -15,4 +15,5 @@ public class ServerQueryType implements Serializable {
     public static final int GET_ALL_STOCKS = 10;
     public static final int BUY_STOCK = 11;
     public static final int SELL_STOCK = 12;
+    public static final int LOG_OUT = 13;
 }

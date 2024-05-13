@@ -1,5 +1,6 @@
 package com.example.final_client_code;
 
+import Client.Connection;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -163,6 +164,7 @@ public class Methods {
             stage.show();
         });
     }
+
     public static void addNextPage(Button button, String fxml){
         button.setOnMouseClicked(mouseEvent -> {
             button.getScene().getWindow().hide();
@@ -181,6 +183,31 @@ public class Methods {
             stage.show();
         });
     }
+
+    public static void logOut(Pane pane,String fxml){
+        pane.setOnMouseClicked(mouseEvent -> {
+
+            Connection connection = Connection.getInstance();
+            connection.disconnectFromServer();
+
+            pane.getScene().getWindow().hide();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+//            scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+            Stage stage = new Stage();
+            stage.setTitle("BankApp!");
+            stage.setScene(scene);
+            stage.show();
+
+        });
+    }
+
     public static void goToNextPage(Button button,String fxml){
         button.getScene().getWindow().hide();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));

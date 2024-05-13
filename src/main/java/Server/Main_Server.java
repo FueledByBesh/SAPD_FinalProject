@@ -36,8 +36,8 @@ public class Main_Server {
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
-
                 System.out.println("CreateNewThread");
+                LOOP:
                 while (true) {
                     int type = in.readInt();
 
@@ -64,16 +64,20 @@ public class Main_Server {
                             executeBuyStock(server, socket, in, out);
                         }case ServerQueryType.SELL_STOCK ->{
                             executeSellStock(server, socket, in, out);
+                        }case ServerQueryType.LOG_OUT -> {
+                            break LOOP;
                         }
                     }
+
                 }
+                in.close();
+                out.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
         thread.start();
     }
-
 
     public static void executeLogIn(Server server, Socket socket, ObjectInputStream in, ObjectOutputStream out){
         try{

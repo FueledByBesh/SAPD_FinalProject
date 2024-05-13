@@ -45,6 +45,7 @@ public class StockChanger implements Worker{
             statement.execute();
             System.out.println("Stock price changed");
         } catch (SQLException e) {
+            System.out.println("--> StockChanger.changePrice -->Something get wrong:(");
             return;
         }
 
@@ -56,9 +57,7 @@ public class StockChanger implements Worker{
         }
         System.out.println("All investors was notified ;)");
 
-        // UPDATED code:
-
-
+        stockAdmission.updateStockHistory(stockID,newPrice);
 
 //        messageSender
 
