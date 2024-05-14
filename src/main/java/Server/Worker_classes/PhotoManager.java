@@ -55,8 +55,10 @@ public class PhotoManager implements Worker {
         return id;
     }
 
-    public Image retrieveImage(int imageID){
-        File file;
+    public void ImageToCache(int imageID){
+        File file = new File("cache/images/"+imageID+"image.png");
+        if(file.exists())
+            return;
         String sql = "SELECT * FROM Images WHERE image_id = ?";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(sql);){
             statement.setInt(1,imageID);
@@ -71,19 +73,13 @@ public class PhotoManager implements Worker {
                 }catch (IOException e){
                     throw new IOException();
                 }
-            }else
-                throw new SQLException();
-            resultSet.close();
-
+            }
         } catch (SQLException e) {
-            System.out.println("--> PhotoManager.retrieveImage --> something get wrong with sql");
-            return null;
+            System.out.println("--> PhotoManager.ImageToCache --> something get wrong with sql");
         } catch (IOException e) {
-            System.out.println("--> PhotoManager.retrieveImage --> something get wrong with IO");
-            return null;
+            System.out.println("--> PhotoManager.ImageToCache --> something get wrong with IO");
         }
 
-        return fileToImageConverter(file);
     }
 
     private int createUniqueID(File file){
@@ -156,15 +152,4 @@ public class PhotoManager implements Worker {
 
     }
 
-    public Image fileToImageConverter(File file){
-        try (FileInputStream fis = new FileInputStream(file)) {
-            return new Image(fis);
-        } catch (FileNotFoundException e) {
-            System.out.println("--> PhotoManager.fileToImageConverter --> FILE NOT FOUND !!!");
-            return null;
-        } catch (IOException e) {
-            System.out.println("--> PhotoManager.fileToImageConverter --> Something get wrong :(");
-            return null;
-        }
-    }
 }

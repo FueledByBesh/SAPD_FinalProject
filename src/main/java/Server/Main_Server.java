@@ -4,6 +4,7 @@ import Client.Messages.Message;
 import Client.Queryes.*;
 import Client.Stock.Stock;
 import Client.User;
+import javafx.scene.image.Image;
 
 import java.io.*;
 import java.net.Socket;
@@ -30,9 +31,9 @@ public class Main_Server {
         }
     }
 
-    public static void createNewThread(Server server, Socket socket){
+    public static void createNewThread(Server server, Socket socket) {
         Thread thread = new Thread(() -> {
-            try{
+            try {
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
@@ -42,31 +43,42 @@ public class Main_Server {
                     int type = in.readInt();
 
                     switch (type) {
-                        case ServerQueryType.LOG_IN ->{
+                        case ServerQueryType.LOG_IN -> {
                             executeLogIn(server, socket, in, out);
-                        }case ServerQueryType.REGISTER -> {
+                        }
+                        case ServerQueryType.REGISTER -> {
                             executeRegister(server, socket, in, out);
-                        }case ServerQueryType.GET_USER_ALL_INFO -> {
+                        }
+                        case ServerQueryType.GET_USER_ALL_INFO -> {
                             executeGetAllUserIngo(server, socket, in, out);
-                        }case ServerQueryType.GET_USER_NOT_ALL_INFO -> {
+                        }
+                        case ServerQueryType.GET_USER_NOT_ALL_INFO -> {
                             executeGetNotAllUserIngo(server, socket, in, out);
-                        }case ServerQueryType.GET_USER_MESSAGES -> {
+                        }
+                        case ServerQueryType.GET_USER_MESSAGES -> {
                             executeGetUserMessages(server, socket, in, out);
-                        }case ServerQueryType.GET_USER_STOCKS -> {
+                        }
+                        case ServerQueryType.GET_USER_STOCKS -> {
                             executeGetUserStocks(server, socket, in, out);
-                        }case ServerQueryType.TRANSFER -> {
+                        }
+                        case ServerQueryType.TRANSFER -> {
                             executeTransfer(server, socket, in, out);
-                        }case ServerQueryType.GET_USER_BY_PHONE -> {
+                        }
+                        case ServerQueryType.GET_USER_BY_PHONE -> {
                             executeGetNotAllUserInfoWithPhone(server, socket, in, out);
-                        }case ServerQueryType.GET_ALL_STOCKS -> {
+                        }
+                        case ServerQueryType.GET_ALL_STOCKS -> {
                             executeGetAllStocks(server, socket, in, out);
-                        }case ServerQueryType.BUY_STOCK -> {
+                        }
+                        case ServerQueryType.BUY_STOCK -> {
                             executeBuyStock(server, socket, in, out);
-                        }case ServerQueryType.SELL_STOCK ->{
+                        }
+                        case ServerQueryType.SELL_STOCK -> {
                             executeSellStock(server, socket, in, out);
-                        }case ServerQueryType.LOG_OUT -> {
+                        }
+                        case ServerQueryType.LOG_OUT -> {
                             int userId = in.readInt();
-                            System.out.println("Section for user "+userId+" ended !!!");
+                            System.out.println("Section for user " + userId + " ended !!!");
                             break LOOP;
                         }
                     }
@@ -80,6 +92,7 @@ public class Main_Server {
         });
         thread.start();
     }
+
 
     public static void executeLogIn(Server server, Socket socket, ObjectInputStream in, ObjectOutputStream out){
         try{

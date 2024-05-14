@@ -1,8 +1,6 @@
 package com.example.final_client_code.Controllers;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,6 +9,7 @@ import Client.Queryes.BuyStockQuery;
 import Client.Queryes.ServerQueryType;
 import Client.Stock.Stock;
 import Client.User;
+import Server.Worker_classes.PhotoManager;
 import com.example.final_client_code.Methods;
 import com.example.final_client_code.MyUser;
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -81,6 +81,19 @@ public class StockBlockController {
         stockPriceText.setText(stock.getStockPrice()+"₸");
         this.stockPrice = stock.getStockPrice();
         stockDescriptionText.setText(stock.getStockDescription());
+        Image image = getStockImage(stock.getStockIconID());
+        if(image!=null)
+            stockImage.setImage(image);
+    }
+
+    private Image getStockImage(int id){
+
+        if(id==0)
+            return null;
+
+        String path = "cache/images/";
+        File file = new File(path+id+"image.png");
+        return fileToImageConverter(file);
     }
 
     public void setActions(int stockID){
@@ -123,6 +136,18 @@ public class StockBlockController {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    private Image fileToImageConverter(File file){
+        try (FileInputStream fis = new FileInputStream(file)) {
+            return new Image(fis);
+        } catch (FileNotFoundException e) {
+            System.out.println("--> PhotoManager.fileToImageConverter --> FILE NOT FOUND !!!");
+            return null;
+        } catch (IOException e) {
+            System.out.println("--> PhotoManager.fileToImageConverter --> Something get wrong :(");
+            return null;
+        }
     }
 
 

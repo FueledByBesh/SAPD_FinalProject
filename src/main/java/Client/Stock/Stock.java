@@ -15,7 +15,7 @@ public class Stock implements Serializable {
     private int stockInvestorsCount;
     private String stockDescription;
     private int stockCount = 0;
-    private int stockIconID;
+    private Integer stockIconID;
 
     public Stock(int stockID, String stockName, int stockPrice, List<StockPriceHistory> priceHistory, int stockInvestorsCount, String stockDescription,int stockIconID) {
         this.stockID = stockID;
@@ -80,11 +80,11 @@ public class Stock implements Serializable {
         this.stockInvestorsCount = stockInvestorsCount;
     }
 
-    public int getStockIconID() {
+    public Integer getStockIconID() {
         return stockIconID;
     }
 
-    public void setStockIconID(int stockIconID) {
+    public void setStockIconID(Integer stockIconID) {
         this.stockIconID = stockIconID;
     }
 

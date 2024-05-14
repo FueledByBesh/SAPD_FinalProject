@@ -5,7 +5,6 @@ import Client.*;
 import Client.Stock.StockPriceHistory;
 import Server.DataBaseSingleton;
 import Server.Server;
-import javafx.scene.image.Image;
 
 import java.io.File;
 import java.sql.*;
@@ -15,7 +14,7 @@ import java.util.Objects;
 
 public class StockAdmission implements Worker{
     DataBaseSingleton dataBase;
-    PhotoManager photoManager;
+    public PhotoManager photoManager;
     Admission admission;
     public StockAdmission(DataBaseSingleton dataBase) {
         this.dataBase = dataBase;
@@ -29,7 +28,7 @@ public class StockAdmission implements Worker{
 
     public void addNewStock(String stockName, String stock_description, int price, File icon) {
 
-        int iconId = photoManager.storeImage(icon);
+        int iconId = (icon==null)?0:photoManager.storeImage(icon);
 
         int stockID = createUniqueID(stockName,stock_description,price);
         String query = "INSERT INTO Stocks(stock_id,stock_name, stock_price, stock_description,stock_iconid) VALUES (?,?,?,?,?)";
@@ -91,6 +90,7 @@ public class StockAdmission implements Worker{
         String stockDescription = table.getString("stock_description");
         int iconID = table.getInt("stock_iconid");
 
+        photoManager.ImageToCache(iconID);
         return new Stock(stockID, stockName, stock_price, getStockHistory(stockID), getStockInvestorsID(stockID).size(), stockDescription,iconID);
     }
 
@@ -103,14 +103,11 @@ public class StockAdmission implements Worker{
                 stocks.add(getStockFromResultSet(table));
             }
         } catch (SQLException e) {
-            System.out.println("Some error when try to get all stocks, "+e.getMessage());
+            System.out.println("--> StockAdmission.getAllStocks --> Some error while trying to get all stocks");
         }
         return stocks;
     }
 
-    public Image getStockImage(Stock stock){
-        return photoManager.retrieveImage(stock.getStockIconID());
-    }
 
     public boolean addInvestorToStock(int userID, int stockID, int stockCount){
         User user = admission.getUserInfoWithID(userID, false);
