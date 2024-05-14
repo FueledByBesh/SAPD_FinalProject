@@ -59,7 +59,7 @@ public class MainPageController {
     public void addConstrains(){
         Methods.addNextPage(myAccountPagePane,"My_account_page.fxml");
         Methods.addNextPage(MessagesPagePane,"Messages_page.fxml");
-        Methods.logOut(backPane,"First_page.fxml");
+        Methods.logOut(backPane,"First_page.fxml",MyUser.getCurrentUser().getUserID());
         Methods.addNextPage(transferMoneyPagePane, "Transfer_page.fxml");
         Methods.addNextPage(stocksPagePane,"Stocks_page.fxml");
         Methods.addNextPage(myStocksPane, "My_stocks_page.fxml");

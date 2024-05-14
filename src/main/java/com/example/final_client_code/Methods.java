@@ -184,11 +184,11 @@ public class Methods {
         });
     }
 
-    public static void logOut(Pane pane,String fxml){
+    public static void logOut(Pane pane,String fxml,int userId){
         pane.setOnMouseClicked(mouseEvent -> {
 
             Connection connection = Connection.getInstance();
-            connection.disconnectFromServer();
+            connection.disconnectFromServer(userId);
 
             pane.getScene().getWindow().hide();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));

@@ -130,7 +130,7 @@ public class StockAdmission implements Worker{
             ResultSet table = statement.executeQuery();
 
             if(table.next()){
-                System.out.println("This user before invests this stock!");
+                System.out.println("This user before invested in this stock!");
                 String query2 = "UPDATE stockInvestors SET stock_count = stock_count + ? WHERE invest_id = ?";
                 try(PreparedStatement statement1 = dataBase.getConnection().prepareStatement(query2)){
                     statement1.setInt(1, stockCount);
@@ -139,11 +139,11 @@ public class StockAdmission implements Worker{
                     System.out.println("user "+user.getUserInfo().getFirstName()+", invested to the stock "+stock.getStockName()+", count of stocks = "+stockCount);
                     return true;
                 }catch (SQLException e) {
-                    System.out.println("Error when update StockCount, "+ e.getMessage());
+                    System.out.println("--> StockAdmission.addInvestorToStock --> Error while updating StockCount");
                     return false;
                 }
             }else {
-                System.out.println("This user Before don't invest this stock");
+                System.out.println("This user Before don't invested in this stock");
             }
         } catch (SQLException e) {
             System.out.println("Error when try to find suers stock, "+ e.getMessage());
@@ -160,7 +160,7 @@ public class StockAdmission implements Worker{
             System.out.println("user "+user.getUserInfo().getFirstName()+", invest the stock "+stock.getStockName()+", count od stocks = "+stockCount);
             return true;
         } catch (SQLException e) {
-            System.out.println("Error when try add StockInvestor :(, "+ e.getMessage());
+            System.out.println("--> StockAdmission.addInvestorToStock --> Error while trying to add StockInvestor :(");
             return false;
         }
     }

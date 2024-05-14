@@ -67,25 +67,25 @@ public class Transfer implements Worker{
             return false;
         }
 
-        if(user.getBalance() < stockCount*stock.getStockPrice()){
-            System.out.println("Users balance not have enough money!!!");
+        int newBalance = user.getBalance()-(stockCount*stock.getStockPrice());
+
+        if(newBalance<0)
+            newBalance=0;
+
+        String query = "UPDATE Users SET balance = ? WHERE user_id = ?";
+        try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
+            statement.setInt(1, newBalance);
+            statement.setInt(2, userID);
+
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("--> Transfer.buyStock --> Error while updating balance");
             return false;
         }
 
-//        String query = "UPDATE Users SET balance = balance - ? WHERE user_id = ?";
-//        try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
-//            statement.setInt(1, stockCount*stock.getStockPrice());
-//            statement.setInt(2, userID);
-//
-//            statement.execute();
-//        } catch (SQLException e) {
-//            System.out.println("Error when subtract from user balance, "+e.getMessage()+" errorCode = "+e.getErrorCode());
-//            return false;
-//        }
-
-        System.out.println("Buy stock");
+        System.out.println("Stock bought !!!");
         stockAdmission.addInvestorToStock(userID, stockID, stockCount);
-        messageSender.sendStockBuyMessage(userID, stockID,"You have already buy " +stockCount+ " stock on '"+stock.getStockName()+ "'",stockCount*stock.getStockPrice());
+        messageSender.sendStockBuyMessage(userID, stockID,"You've successfully bought " +stockCount+ " stock on '"+stock.getStockName()+ "'",stockCount*stock.getStockPrice());
         return true;
 
         // TODO: 31.12.2023 Birinshi add investor to stock zhasau kerek potom SQL tranzakciamen aksha alym message zhiberemiz
@@ -101,14 +101,16 @@ public class Transfer implements Worker{
             return false;
         }
 
-        String query = "UPDATE Users SET balance = balance + ? WHERE user_id = ?";
+        int newBalance = user.getBalance()+(stockCount*stock.getStockPrice());
+
+        String query = "UPDATE Users SET balance = ? WHERE user_id = ?";
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
-            statement.setInt(1, stockCount*stock.getStockPrice());
+            statement.setInt(1, newBalance);
             statement.setInt(2, userID);
 
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Error when subtract from user balance, "+e.getMessage()+" errorCode = "+e.getErrorCode());
+            System.out.println("--> Transfer.sellStock --> Error while updating balance");
             return false;
         }
 

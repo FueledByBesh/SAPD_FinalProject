@@ -65,6 +65,8 @@ public class Main_Server {
                         }case ServerQueryType.SELL_STOCK ->{
                             executeSellStock(server, socket, in, out);
                         }case ServerQueryType.LOG_OUT -> {
+                            int userId = in.readInt();
+                            System.out.println("Section for user "+userId+" ended !!!");
                             break LOOP;
                         }
                     }

@@ -56,23 +56,39 @@ public class MyStockBlockController {
 
     @FXML
     private Text stockPriceText;
+    private int stockPrice;
+    private int myStockCount;
 
     @FXML
     void initialize() {
         Methods.restrictToNumericInput(stockCountField);
         plusbutton.setOnAction(actionEvent -> {
-            stockCountField.setText(Integer.parseInt(stockCountField.getText())+1+"");
+            int count = Integer.parseInt(stockCountField.getText());
+            if(count==myStockCount)
+                return;
+            if(count>myStockCount)
+                count=myStockCount;
+            else
+                count++;
+            stockCountField.setText(String.valueOf(count));
         });
         minusButton.setOnAction(actionEvent -> {
-            stockCountField.setText(Integer.parseInt(stockCountField.getText())-1+"");
+            int count = Integer.parseInt(stockCountField.getText());
+            if(count<=1)
+                return;
+            count--;
+            stockCountField.setText(String.valueOf(count));
+//            stockCountField.setText(Integer.parseInt(stockCountField.getText())-1+"");
         });
     }
 
     public void setDate(Stock stock){
         stockNameText.setText(stock.getStockName());
-        stockPriceText.setText(stock.getStockPrice()+"");
+        stockPriceText.setText(stock.getStockPrice()+"₸");
         stockDescriptionText.setText(stock.getStockDescription());
         stockCountText.setText(stock.getStockCount()+"");
+        this.stockPrice = stock.getStockPrice();
+        this.myStockCount = stock.getStockCount();
     }
 
     public void setActions(int stockID, MyStocksPageController myStockPage){
@@ -92,9 +108,9 @@ public class MyStockBlockController {
                 boolean bool = in.readBoolean();
 
                 if(bool){
-                    Methods.showConfirmAlert("Success", "You already SELL the stock ;)");
+                    Methods.showConfirmAlert("Success", "You successfully sold the stock ;)");
                 }else {
-                    Methods.showErrorAlert("ERROR", "Error when try SELL stock ;(");
+                    Methods.showErrorAlert("ERROR", "Error while trying to SELL stock ;(");
                 }
                 myStockPage.refreshPage();
             } catch (IOException e) {

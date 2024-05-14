@@ -45,9 +45,12 @@ public class Connection {
             System.out.println("? Error when try connect to Server ?");
         }
     }
-    public void disconnectFromServer(){
+    public void disconnectFromServer(int userId){
         try {
             out.writeInt(ServerQueryType.LOG_OUT);
+            out.flush();
+
+            out.writeInt(userId);
             out.flush();
             socket.close();
             instance = null;

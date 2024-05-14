@@ -10,6 +10,7 @@ import Client.Connection;
 import Client.Queryes.BuyStockQuery;
 import Client.Queryes.ServerQueryType;
 import Client.Stock.Stock;
+import Client.User;
 import com.example.final_client_code.Methods;
 import com.example.final_client_code.MyUser;
 import javafx.event.ActionEvent;
@@ -55,27 +56,44 @@ public class StockBlockController {
 
     @FXML
     private Text stockPriceText;
+    private int stockPrice;
 
 
     @FXML
     void initialize() {
         Methods.restrictToNumericInput(stockCountField);
         plusbutton.setOnAction(actionEvent -> {
-            stockCountField.setText(Integer.parseInt(stockCountField.getText())+1+"");
+            int count = Integer.parseInt(stockCountField.getText());
+            count++;
+            stockCountField.setText(String.valueOf(count));
         });
         minusButton.setOnAction(actionEvent -> {
-            stockCountField.setText(Integer.parseInt(stockCountField.getText())-1+"");
+            int count = Integer.parseInt(stockCountField.getText());
+            if(count<=1)
+                return;
+            count--;
+            stockCountField.setText(String.valueOf(count));
         });
     }
 
     public void setDate(Stock stock){
         stockNameText.setText(stock.getStockName());
-        stockPriceText.setText(stock.getStockPrice()+"");
+        stockPriceText.setText(stock.getStockPrice()+"₸");
+        this.stockPrice = stock.getStockPrice();
         stockDescriptionText.setText(stock.getStockDescription());
     }
 
     public void setActions(int stockID){
         buybutton.setOnAction(actionEvent -> {
+
+            int amount = this.stockPrice*Integer.parseInt(this.stockCountField.getText());
+            System.out.println("Amount: "+amount);
+
+            if(MyUser.getCurrentUser().getBalance()<amount){
+                Methods.showErrorAlert("ERROR","You don't have enough money:(");
+                return;
+            }
+
 //            System.out.println(MyUser.getCurrentUser());
             try{
 //                System.out.println("Connecting...");
@@ -97,7 +115,7 @@ public class StockBlockController {
                 boolean bool = in.readBoolean();
 
                 if(bool){
-                    Methods.showConfirmAlert("Success", "You already buy the stock ;)");
+                    Methods.showConfirmAlert("Success", "You successfully bought the stock ;)");
                 }else {
                     Methods.showErrorAlert("ERROR", "Error when try buy stock ;(");
                 }
