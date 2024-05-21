@@ -1,29 +1,11 @@
 package com.example.final_client_code;
 
-import Client.Connection;
-import Client.Messages.Message;
-import Client.Queryes.LoginUserQuery;
-import Client.Queryes.ServerQueryType;
-import Client.User;
-import Server.DataBaseSingleton;
-import Server.Worker_classes.PhotoManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.sql.SQLException;
 
 public class HelloApplication extends Application {

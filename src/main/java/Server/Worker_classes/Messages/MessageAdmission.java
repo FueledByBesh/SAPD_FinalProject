@@ -51,7 +51,6 @@ public class MessageAdmission implements Worker {
         stockBuySellMessageSender.sendStockBuyMessage(toUserID, stockID, message, money_amount);
     }
 
-    // TODO: 20.12.2023
     public void sendStockSellMessage(int toUserID, int stockID, String message, int money_amount){
         stockBuySellMessageSender.sendStockSellMessage(toUserID, stockID, message, money_amount);
     }

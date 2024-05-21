@@ -114,10 +114,9 @@ public class Transfer implements Worker{
             return false;
         }
 
-        // TODO: 17.12.2023 removeInvestor zhaz 
         boolean isWithdraw = stockAdmission.withdrawStockCountFromInvestor(userID, stockID, stockCount);
         if(isWithdraw){
-            messageSender.sendStockSellMessage(userID, stockID,"You have already sell stock '"+stock.getStockName()+ "', count of stock = "+stockCount,stockCount*stock.getStockPrice());
+            messageSender.sendStockSellMessage(userID, stockID,"You have successfully sold stock '"+stock.getStockName()+ "', count of stock = "+stockCount,stockCount*stock.getStockPrice());
             return true;
         }
         return false;

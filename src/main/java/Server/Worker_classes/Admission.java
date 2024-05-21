@@ -126,7 +126,6 @@ public class Admission implements Worker{
         return user;
     }
     public User returnAllInfoFromResultSet(ResultSet table) throws SQLException {
-        // TODO: 16.12.2023 zhazu kerek message stock tan keiyn
         User user = returnNotAllInfoFromResultSet(table);
 
         user.setMessages(messageSender.getListOfMessagesWithUserID(user.getUserID()));

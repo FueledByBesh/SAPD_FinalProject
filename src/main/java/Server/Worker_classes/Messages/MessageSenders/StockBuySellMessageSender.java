@@ -37,8 +37,8 @@ public class StockBuySellMessageSender extends MessageSender {
     public void sendStockSellMessage(int toUserID, int stockID, String message, int money_amount){
         User user = this.admission.getUserInfoWithID(toUserID, false);
         Stock stock = this.stockAdmission.getStockWithID(stockID);
-        String query = "INSERT INTO StockBuySellMessages(message_type, message, message_from_name, message_to_id, message_to_name, money_amount)\n" +
-                "VALUES (?,?,?,?,?,?);";//6
+        String query = "INSERT INTO StockBuySellMessages(message_type, message, message_from_name, message_to_id, message_to_name, money_amount,available_money,message_time)\n" +
+                "VALUES (?,?,?,?,?,?,?,current_timestamp);";//7
         try(PreparedStatement statement = dataBase.getConnection().prepareStatement(query)){
             statement.setInt(1, MessageType.STOCK_SELL_MESSAGE);
             statement.setString(2, message);
@@ -46,6 +46,7 @@ public class StockBuySellMessageSender extends MessageSender {
             statement.setInt(4, toUserID);
             statement.setString(5, user.getUserInfo().getFirstName()+" "+user.getUserInfo().getLastname());
             statement.setInt(6, money_amount);
+            statement.setInt(7, user.getBalance());
             statement.execute();
         } catch (SQLException e) {
             System.out.println("Error when try to send about Sell Stock message to user "+toUserID+", "+e.getMessage());

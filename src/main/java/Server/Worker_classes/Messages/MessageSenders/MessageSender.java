@@ -27,7 +27,6 @@ public abstract class MessageSender {
         this.dataBase = dataBase;
     }
 
-    // TODO: Template Method
     public abstract String getQuery();
 
     public ArrayList<Message> getMessage(ArrayList<Message> messages, int userID){
@@ -51,7 +50,6 @@ public abstract class MessageSender {
         return messages;
     };
 
-    // TODO: Factory Method (20.12.2023)
     protected void putMessagesFromResultSet(ArrayList<Message> messages, ResultSet table) throws SQLException {
         int messageType = table.getInt("message_type");
         MessageFactory factory = getFactoryByMessageType(messageType);
@@ -79,7 +77,6 @@ public abstract class MessageSender {
         }
     }
 
-    // TODO: 22.12.2023 Chain of Resp
     public void setNextSender(MessageSender nextSender){
         this.nextSender = nextSender;
     }

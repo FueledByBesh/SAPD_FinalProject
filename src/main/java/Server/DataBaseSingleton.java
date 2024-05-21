@@ -13,7 +13,6 @@ public class DataBaseSingleton {
     }
 
     public static DataBaseSingleton getInstance(int port,String nameDB,String user,String pass) throws SQLException {
-        // TODO: 12.12.2023 -> Here we use the singleton code
         if(instance == null){
             synchronized (DataBaseSingleton.class){
                 if(instance == null){
